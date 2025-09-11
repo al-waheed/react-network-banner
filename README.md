@@ -35,7 +35,6 @@ npm install react-network-banner
 # or
 yarn add react-network-banner
 
-🖼️ Usage
 
 1. Basic Banner
 
@@ -74,15 +73,16 @@ function App() {
   );
 }
 
+
 3. Using the Hook
 
 import { useNetworkStatus } from "react-network-banner";
 
 function NetworkIndicator() {
   const status = useNetworkStatus(); // "offline" | "poor" | "good"
-
   return <p>Current status: {status}</p>;
 }
+
 
 4. Alerts Example
 
@@ -101,24 +101,20 @@ function App() {
   return <h1>App Content</h1>;
 }
 
----
 
-## ⚙️ API Reference
+⚙️ API Reference
+<NetworkBanner /> Props
 
-### `<NetworkBanner />` Props
+| Prop        | Type                                                          | Default                                               | Description                                                  |
+| ----------- | ------------------------------------------------------------- | ----------------------------------------------------- | ------------------------------------------------------------ |
+| `messages`  | `{ offline?: string; poor?: string; good?: string }`          | `{ offline: "You are offline", good: "Back online" }` | Custom text to display for each network state.               |
+| `icons`     | `{ offline?: ReactNode; poor?: ReactNode; good?: ReactNode }` | `undefined`                                           | Custom icons for each network state (e.g., `<FiWifiOff />`). |
+| `position`  | `"top"` \| `"bottom"`                                         | `"bottom"`                                            | Position of the banner on the screen.                        |
+| `duration`  | `number`                                                      | `3000`                                                | How long (ms) the banner stays visible when status changes.  |
+| `className` | `string`                                                      | `""`                                                  | Additional CSS classes for custom styling.                   |
+| `style`     | `React.CSSProperties`                                         | `undefined`                                           | Inline styles for custom theming.                            |
 
-| Prop       | Type                           | Default             | Description                                                                 |
-|------------|--------------------------------|---------------------|-----------------------------------------------------------------------------|
-| `messages` | `{ offline?: string; poor?: string; good?: string }` | `{ offline: "You are offline", good: "Back online" }` | Custom text to display for each network state. |
-| `icons`    | `{ offline?: ReactNode; poor?: ReactNode; good?: ReactNode }` | `undefined` | Custom icons for each network state (e.g., `<FiWifiOff />`). |
-| `position` | `"top"` \| `"bottom"`          | `"bottom"`          | Position of the banner on the screen.                                       |
-| `duration` | `number`                       | `3000`              | How long (ms) the banner stays visible when status changes.                 |
-| `className`| `string`                       | `""`                | Additional CSS classes for custom styling.                                  |
-| `style`    | `React.CSSProperties`          | `undefined`         | Inline styles for custom theming.                                           |
 
----
+useNetworkStatus() Hook
 
-### `useNetworkStatus()` Hook
-
-```ts
-const status = useNetworkStatus();
+const status = useNetworkStatus(); // "offline" | "poor" | "good"
