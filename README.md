@@ -1,4 +1,4 @@
-# 📡 react-network-banner
+# 📡 network-banner
 
 [![npm version](https://img.shields.io/npm/v/react-network-banner?color=blue)](https://www.npmjs.com/package/react-network-banner)  
 [![npm downloads](https://img.shields.io/npm/dm/react-network-banner.svg?color=brightgreen)](https://www.npmjs.com/package/react-network-banner)  
