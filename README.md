@@ -122,9 +122,3 @@ function App() {
 
 ```ts
 const status = useNetworkStatus();
-
-
-## 📜 License
-
-MIT License © 2025 [Morenikeji Ajisegiri](https://github.com/al-waheed)  
-See the [LICENSE](./LICENSE) file for details.
