@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/github/license/al-waheed/react-network-banner)](./LICENSE)
 
 
-A lightweight React component and hook to monitor **network connectivity** and display a **banner** when your app goes offline, has poor connectivity, or comes back online.
+A lightweight React component and hook to monitor network connectivity and display a customizable banner when your app goes offline, has poor connectivity, or comes back online. Fully compatible with React, Next.js (SSR), and other modern frameworks.
 
 ---
 
@@ -20,11 +20,12 @@ _(GIF shows the banner appearing when offline and hiding when back online.)_
 
 ## 🚀 Features
 
-- 📶 Detects **online / offline / poor** connections
-- 🧩 Drop-in **banner component** (`<NetworkBanner />`)
-- 🪝 Custom **hook** (`useNetworkStatus()`)
-- 🎛️ Fully customizable: messages, icons, styles, position
-- 🌐 Works in all modern browsers with fallbacks
+- 📶 Detects connectivity: online, offline, and poor network states
+- 🧩 Drop-in banner component – <NetworkBanner /> for instant UI feedback
+- 🪝 Custom hook – useNetworkStatus() to integrate status in your own components
+- 🎛️ Fully customizable – messages, icons, styles, and banner position
+- 🌐 Cross-browser support with graceful fallbacks
+- ⚡ Next.js SSR compatible – works seamlessly in server-side rendered apps
 
 ---
 
@@ -60,7 +61,6 @@ function App() {
     <NetworkBanner
       messages={{
         offline: "❌ No Internet",
-        poor: "⚠️ Weak connection",
         good: "✅ Back online",
       }}
       icons={{
@@ -79,7 +79,7 @@ function App() {
 import { useNetworkStatus } from "react-network-banner";
 
 function NetworkIndicator() {
-  const status = useNetworkStatus(); // "offline" | "poor" | "good"
+  const status = useNetworkStatus(); // "offline" | "good"
   return <p>Current status: {status}</p>;
 }
 
@@ -94,7 +94,6 @@ function App() {
 
   useEffect(() => {
     if (status === "offline") alert("⚠️ You are offline!");
-    if (status === "poor") alert("⚠️ Weak network");
     if (status === "good") alert("✅ Back online!");
   }, [status]);
 
@@ -107,8 +106,8 @@ function App() {
 
 | Prop        | Type                                                          | Default                                               | Description                                                  |
 | ----------- | ------------------------------------------------------------- | ----------------------------------------------------- | ------------------------------------------------------------ |
-| `messages`  | `{ offline?: string; poor?: string; good?: string }`          | `{ offline: "You are offline", good: "Back online" }` | Custom text to display for each network state.               |
-| `icons`     | `{ offline?: ReactNode; poor?: ReactNode; good?: ReactNode }` | `undefined`                                           | Custom icons for each network state (e.g., `<FiWifiOff />`). |
+| `messages`  | `{ offline?: string; good?: string }`          | `{ offline: "You are offline", good: "Back online" }` | Custom text to display for each network state.               |
+| `icons`     | `{ offline?: ReactNode; good?: ReactNode }` | `undefined`                                           | Custom icons for each network state (e.g., `<FiWifiOff />`). |
 | `position`  | `"top"` \| `"bottom"`                                         | `"bottom"`                                            | Position of the banner on the screen.                        |
 | `duration`  | `number`                                                      | `3000`                                                | How long (ms) the banner stays visible when status changes.  |
 | `className` | `string`                                                      | `""`                                                  | Additional CSS classes for custom styling.                   |
@@ -117,4 +116,4 @@ function App() {
 
 useNetworkStatus() Hook
 
-const status = useNetworkStatus(); // "offline" | "poor" | "good"
+const status = useNetworkStatus(); // "offline" | "good"
