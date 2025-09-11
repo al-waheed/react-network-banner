@@ -17,7 +17,9 @@
   },
   "keywords": [
     "react",
-    "offline",
+    "offline-banner",
+    "network-banner",
+    "network-status",
     "banner",
     "network",
     "react-component",
