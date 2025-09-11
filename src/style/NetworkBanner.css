@@ -1,0 +1,41 @@
+.offline-banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Inter", "Segoe UI", Roboto, sans-serif;
+  gap: 0.5rem;
+  padding: 0.3rem;
+  font-size: 13px;
+  font-weight: 600;
+  color: white;
+  transition: transform 0.5s ease-in-out;
+}
+
+.offline-banner.top {
+  top: 0;
+}
+
+.offline-banner.bottom {
+  bottom: 0;
+}
+
+.offline-banner.good {
+  background-color: #16a34a; /* green */
+}
+
+.offline-banner.offline {
+  background-color: #dc2626; /* red */
+}
+
+.offline-banner.poor {
+  background-color: #f59e0b; /* yellow */
+  color: black;
+}
+
+.offline-banner.hidden {
+  transform: translateY(-100%);
+}
