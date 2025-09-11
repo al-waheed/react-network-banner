@@ -12,7 +12,7 @@ A lightweight React component and hook to monitor **network connectivity** and d
 
 ## 🎥 Demo Preview
 
-![Demo](./demo/demo-banner.gif)
+![Demo](https://raw.githubusercontent.com/al-waheed/react-network-banner/master/demo/demo-app/demo-banner.gif)
 
 _(GIF shows the banner appearing when offline and hiding when back online.)_
 
