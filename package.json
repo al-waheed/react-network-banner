@@ -1,6 +1,6 @@
 {
   "name": "react-network-banner",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A lightweight React component and hook to monitor network connectivity and display a banner UI when your app goes offline, has poor network, or comes back online.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
