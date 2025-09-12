@@ -5,8 +5,7 @@
 [![GitHub stars](https://img.shields.io/github/stars/al-waheed/react-network-banner?style=social)](https://github.com/al-waheed/react-network-banner)  
 [![License](https://img.shields.io/github/license/al-waheed/react-network-banner)](./LICENSE)
 
-
-A lightweight React component and hook to monitor network connectivity and display a customizable banner when your app goes offline, has poor connectivity, or comes back online. Fully compatible with React, Next.js (SSR), and other modern frameworks.
+A lightweight React component and hook to monitor network connectivity and display a customizable banner when your app goes offline or comes back online. Fully compatible with React, Next.js (SSR), and other modern frameworks.
 
 ---
 
@@ -20,12 +19,13 @@ _(GIF shows the banner appearing when offline and hiding when back online.)_
 
 ## 🚀 Features
 
-- 📶 Detects connectivity: online, offline, and poor network states
-- 🧩 Drop-in banner component – <NetworkBanner /> for instant UI feedback
-- 🪝 Custom hook – useNetworkStatus() to integrate status in your own components
-- 🎛️ Fully customizable – messages, icons, styles, and banner position
-- 🌐 Cross-browser support with graceful fallbacks
+- 📶 Detects online / offline connections
+- 🧩 Drop-in banner component (<NetworkBanner />)
+- 🪝 Custom hook (useNetworkStatus())
+- 🎛️ Fully customizable: messages, icons, styles, position
+- 🌐 Works in all modern browsers with fallbacks
 - ⚡ Next.js SSR compatible – works seamlessly in server-side rendered apps
+- 🔧 Supports custom check URL & timeout (use your own /health endpoint instead of Google’s default)
 
 ---
 
@@ -36,9 +36,11 @@ npm install react-network-banner
 # or
 yarn add react-network-banner
 
+```
 
-1. Basic Banner
+## Basic Banner
 
+```bash
 import { NetworkBanner } from "react-network-banner";
 
 function App() {
@@ -49,9 +51,35 @@ function App() {
     </div>
   );
 }
+```
+
+## Using the Hook
+
+```bash
+
+By default it uses Google’s connectivity check:
+https://www.gstatic.com/generate_204
 
 
-2. Custom Messages & Icons
+fimport React, { useEffect } from "react";
+import { useNetworkStatus } from "react-network-banner";
+
+function App() {
+  const status = useNetworkStatus();
+
+  useEffect(() => {
+    if (status === "offline") {
+      alert("⚠️ You are offline!");
+    } else if (status === "good") {
+      alert("✅ Back online!");
+    }
+  }, [status]);
+
+  return <div>Network status: {status}</div>;
+}
+
+
+Example: Custom messages, icons, and health check
 
 import { NetworkBanner } from "react-network-banner";
 import { FiWifiOff, FiWifi } from "react-icons/fi";
@@ -59,61 +87,59 @@ import { FiWifiOff, FiWifi } from "react-icons/fi";
 function App() {
   return (
     <NetworkBanner
-      messages={{
-        offline: "❌ No Internet",
-        good: "✅ Back online",
-      }}
-      icons={{
-        offline: <FiWifiOff />,
-        good: <FiWifi />,
-      }}
-      position="top"
-      duration={4000}
+     checkUrl="/health"
+     timeout={3000}
+     position="bottom"
+     messages={{
+     offline: "🚨 Connection lost",
+     good: "✅ Back online!",
+     }}
+     icons={{
+     offline: <span>📡</span>,
+     good: <span>🌍</span>,
+     }}
+     className="my-banner"
     />
   );
 }
 
-
-3. Using the Hook
-
-import { useNetworkStatus } from "react-network-banner";
-
-function NetworkIndicator() {
-  const status = useNetworkStatus(); // "offline" | "good"
-  return <p>Current status: {status}</p>;
-}
+```
 
 
-4. Alerts Example
+### ⚙️ Props / API Reference
 
-import { useEffect } from "react";
-import { useNetworkStatus } from "react-network-banner";
+```bash
 
-function App() {
-  const status = useNetworkStatus();
+<NetworkBanner /> 
 
-  useEffect(() => {
-    if (status === "offline") alert("⚠️ You are offline!");
-    if (status === "good") alert("✅ Back online!");
-  }, [status]);
+| Prop        | Type                                                    | Default                                  | Description                                                                                  |
+| ----------- | ------------------------------------------------------- | ---------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `checkUrl`  | `string`                                                | `"https://www.gstatic.com/generate_204"` | Endpoint used to verify real connectivity. Can be replaced with your own `/health` endpoint. |
+| `timeout`   | `number`                                                | `5000`                                   | Timeout (ms) for connectivity check.                                                         |
+| `messages`  | `Partial<Record<"offline" \| "good", string>>`          | See below                                | Custom text messages for each state.                                                         |
+| `icons`     | `Partial<Record<"offline" \| "good", React.ReactNode>>` | Wi-Fi icons                              | Custom icons for each state.                                                                 |
+| `position`  | `"top"` \| `"bottom"`                                   | `"top"`                                  | Banner placement.                                                                            |
+| `duration`  | `number`                                                | `3000`                                   | How long the “back online” banner stays visible (ms).                                        |
+| `className` | `string`                                                | `""`                                     | Custom CSS classes.                                                                          |
+| `style`     | `React.CSSProperties`                                   | `{}`                                     | Inline styles.                                                                               |
 
-  return <h1>App Content</h1>;
-}
+```
 
+ ## 🔧 Custom Health Check Endpoint
 
-⚙️ API Reference
-<NetworkBanner /> Props
+ ```bash 
+You can replace Google’s generate_204 with your own backend health check.
 
-| Prop        | Type                                                          | Default                                               | Description                                                  |
-| ----------- | ------------------------------------------------------------- | ----------------------------------------------------- | ------------------------------------------------------------ |
-| `messages`  | `{ offline?: string; good?: string }`          | `{ offline: "You are offline", good: "Back online" }` | Custom text to display for each network state.               |
-| `icons`     | `{ offline?: ReactNode; good?: ReactNode }` | `undefined`                                           | Custom icons for each network state (e.g., `<FiWifiOff />`). |
-| `position`  | `"top"` \| `"bottom"`                                         | `"bottom"`                                            | Position of the banner on the screen.                        |
-| `duration`  | `number`                                                      | `3000`                                                | How long (ms) the banner stays visible when status changes.  |
-| `className` | `string`                                                      | `""`                                                  | Additional CSS classes for custom styling.                   |
-| `style`     | `React.CSSProperties`                                         | `undefined`                                           | Inline styles for custom theming.                            |
+// server.js
+import express from "express";
+const app = express();
 
+app.get("/health", (req, res) => {
+  res.sendStatus(204); // respond with 204 No Content
+});
 
-useNetworkStatus() Hook
+app.listen(3000, () => console.log("Server running on port 3000"));
 
-const status = useNetworkStatus(); // "offline" | "good"
+Now your app can do:
+<NetworkBanner checkUrl="http://localhost:3000/health" />
+```

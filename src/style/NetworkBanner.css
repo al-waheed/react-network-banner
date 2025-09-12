@@ -1,4 +1,4 @@
-.offline-banner {
+.network-banner {
   position: fixed;
   left: 0;
   right: 0;
@@ -15,27 +15,27 @@
   transition: transform 0.5s ease-in-out;
 }
 
-.offline-banner.top {
+.network-banner.top {
   top: 0;
 }
 
-.offline-banner.bottom {
+.network-banner.bottom {
   bottom: 0;
 }
 
-.offline-banner.good {
-  background-color: #16a34a; /* green */
+.network-banner.good {
+  background-color: #16a34a;
 }
 
-.offline-banner.offline {
-  background-color: #dc2626; /* red */
+.network-banner.offline {
+  background-color: #dc2626;
 }
 
-.offline-banner.poor {
-  background-color: #f59e0b; /* yellow */
+.network-banner.poor {
+  background-color: #f59e0b;
   color: black;
 }
 
-.offline-banner.hidden {
+.network-banner.hidden {
   transform: translateY(-100%);
 }

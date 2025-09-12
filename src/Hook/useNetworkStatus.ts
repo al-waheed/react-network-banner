@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 
-export type NetworkStatus = "offline" | "good";
+export type NetworkStatus = "offline" | "good" | "unknown";
 
-export function useNetworkStatus() {
-  const [status, setStatus] = useState<NetworkStatus>("offline");
-  const [initialized, setInitialized] = useState(false);
+export function useNetworkStatus(
+  checkUrl: string = "https://www.gstatic.com/generate_204",
+  timeout: number = 5000
+) {
+  const [status, setStatus] = useState<NetworkStatus>("unknown");
 
   useEffect(() => {
     if (typeof window === "undefined" || typeof navigator === "undefined") {
@@ -14,24 +16,23 @@ export function useNetworkStatus() {
     const checkNetworkStatus = async () => {
       if (!navigator.onLine) {
         setStatus("offline");
-        setInitialized(true);
         return;
       }
 
+      let timeoutId: number | null = null;
       try {
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 5000);
-        await fetch("https://www.gstatic.com/generate_204", {
+        timeoutId = setTimeout(() => controller.abort(), timeout);
+        await fetch(checkUrl, {
           mode: "no-cors",
           signal: controller.signal,
           cache: "no-store",
-        } as RequestInit);
-        clearTimeout(timeoutId);
+        });
         setStatus("good");
       } catch {
         setStatus("offline");
       } finally {
-        setInitialized(true);
+        if (timeoutId) clearTimeout(timeoutId);
       }
     };
 
@@ -43,7 +44,7 @@ export function useNetworkStatus() {
       window.removeEventListener("online", checkNetworkStatus);
       window.removeEventListener("offline", checkNetworkStatus);
     };
-  }, []);
+  }, [checkUrl, timeout]);
 
-  return { status, initialized };
+  return status;
 }

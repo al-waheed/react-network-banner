@@ -1,18 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { MdWifi, MdWifiOff } from "react-icons/md";
 import "./style/NetworkBanner.css";
 import { useNetworkStatus, type NetworkStatus } from "./Hook/useNetworkStatus";
 
+type BannerState = Exclude<NetworkStatus, "unknown">;
+
 type NetworkBannerProps = {
-  messages?: Partial<Record<NetworkStatus, string>>;
-  icons?: Partial<Record<NetworkStatus, React.ReactNode>>;
+  messages?: Partial<Record<BannerState, string>>;
+  icons?: Partial<Record<BannerState, React.ReactNode>>;
   position?: "top" | "bottom";
   duration?: number;
   className?: string;
   style?: React.CSSProperties;
+  checkUrl?: string;
+  timeout?: number;
 };
 
-const OfflineBanner: React.FC<NetworkBannerProps> = ({
+const NetworkBanner: React.FC<NetworkBannerProps> = ({
+  checkUrl = "https://www.gstatic.com/generate_204",
+  timeout = 5000,
   messages = {
     offline: "No internet connection.",
     good: "You are online!",
@@ -26,27 +32,29 @@ const OfflineBanner: React.FC<NetworkBannerProps> = ({
   className = "",
   style = {},
 }) => {
-  const { status, initialized } = useNetworkStatus();
+  const timerRef = useRef<number | null>(null);
+  const status = useNetworkStatus(checkUrl, timeout);
   const [showBanner, setShowBanner] = useState(false);
 
   useEffect(() => {
-    if (!initialized) return;
+    if (status === "unknown") return;
 
     if (status === "offline") {
+      if (timerRef.current) clearTimeout(timerRef.current);
       setShowBanner(true);
     } else if (status === "good") {
-      const timer = setTimeout(() => setShowBanner(false), duration);
-      return () => clearTimeout(timer);
+      if (timerRef.current) clearTimeout(timerRef.current);
+      timerRef.current = setTimeout(() => setShowBanner(false), duration);
     }
-  }, [status, initialized, duration]);
+  }, [status, duration]);
 
-  if (!showBanner || !initialized) return null;
+  if (status === "unknown" || !showBanner) return null;
 
   return (
     <div
-      role="status"
-      aria-live="polite"
-      className={`offline-banner ${position} ${status} ${className}`}
+      role={status === "offline" ? "alert" : "status"}
+      aria-live={status === "offline" ? "assertive" : "polite"}
+      className={`network-banner ${position} ${status} ${className}`}
       style={style}
     >
       {icons[status]}
@@ -55,4 +63,4 @@ const OfflineBanner: React.FC<NetworkBannerProps> = ({
   );
 };
 
-export default OfflineBanner;
+export default NetworkBanner;
