@@ -3,7 +3,6 @@
 [![npm version](https://img.shields.io/npm/v/react-network-banner?color=blue)](https://www.npmjs.com/package/react-network-banner)
 [![npm downloads](https://img.shields.io/npm/dm/react-network-banner.svg?color=brightgreen)](https://www.npmjs.com/package/react-network-banner)
 [![GitHub stars](https://img.shields.io/github/stars/al-waheed/react-network-banner?style=social)](https://github.com/al-waheed/react-network-banner)
-[![License](https://img.shields.io/npm/l/react-network-banner?color=blue)](https://www.npmjs.com/package/react-network-banner)
 [![License](https://img.shields.io/npm/l/react-network-banner?color=blue)](https://github.com/al-waheed/react-network-banner/blob/master/LICENSE)
 
 
