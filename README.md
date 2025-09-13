@@ -34,7 +34,9 @@ _(GIF shows the banner appearing when offline and hiding when back online.)_
 
 ```bash
 npm install react-network-banner
+
 # or
+
 yarn add react-network-banner
 
 ```
@@ -92,12 +94,12 @@ function App() {
      timeout={3000}
      position="bottom"
      messages={{
-     offline: "🚨 Connection lost",
-     good: "✅ Back online!",
+     offline: "Connection lost",
+     good: "Back online!",
      }}
      icons={{
-     offline: <span>📡</span>,
-     good: <span>🌍</span>,
+     offline: "<FiWifiOff/>",
+     good: <FiWifi/>,
      }}
      className="my-banner"
     />
