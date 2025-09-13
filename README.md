@@ -99,7 +99,7 @@ function App() {
      }}
      icons={{
      offline: "<FiWifiOff/>",
-     good: <FiWifi/>,
+     good: "<FiWifi/>",
      }}
      className="my-banner"
     />
