@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { MdWifi, MdWifiOff } from "react-icons/md";
+import { FaWifi } from "react-icons/fa";
 import "./style/NetworkBanner.css";
 import { useNetworkStatus, type NetworkStatus } from "./Hook/useNetworkStatus";
 
@@ -21,10 +22,12 @@ const NetworkBanner: React.FC<NetworkBannerProps> = ({
   timeout = 5000,
   messages = {
     offline: "No internet connection.",
+    poor: "Your connection is unstable.",
     good: "You are online!",
   },
   icons = {
     offline: <MdWifiOff size={18} />,
+    poor: <FaWifi size={18} />,
     good: <MdWifi size={18} />,
   },
   position = "top",
@@ -39,7 +42,7 @@ const NetworkBanner: React.FC<NetworkBannerProps> = ({
   useEffect(() => {
     if (status === "unknown") return;
 
-    if (status === "offline") {
+    if (status === "offline" || status === "poor") {
       if (timerRef.current) clearTimeout(timerRef.current);
       setShowBanner(true);
     } else if (status === "good") {

@@ -1,17 +1,19 @@
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { NetworkBanner, useNetworkStatus } from "react-offline-banner";
 
 function App() {
-  const status = useNetworkStatus(); // Hook usage
+  // const status = useNetworkStatus(); // Hook usage
 
   //Show alert whenever status changes
-  useEffect(() => {
-    if (status === "offline") {
-      alert("⚠️ You are offline!");
-    } else if (status === "good") {
-      alert("✅ Back online!");
-    }
-  }, [status]);
+  // useEffect(() => {
+  //   if (status === "offline") {
+  //     alert("⚠️ You are offline!");
+  //   } else if (status === "poor") {
+  //     alert(" Your network is poor!");
+  //   } else if (status === "good") {
+  //     alert("✅ Back online!");
+  //   }
+  // }, [status]);
 
   return (
     <div style={{ padding: "2rem" }}>
@@ -20,12 +22,9 @@ function App() {
       {/* Banner usage (optional, still shows banner) */}
       <NetworkBanner
         messages={{
-          offline: "You are offline, your connection is trying to connect...",
+          offline: "You are offline",
+          poor: "Your network connection is poor, trying to connect...",
           good: "You are back online",
-        }}
-        icons={{
-          offline: "",
-          good: "",
         }}
         position="top"
         duration={3000}
