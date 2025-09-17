@@ -13,9 +13,9 @@ interface NavigatorConnection extends Navigator {
   };
 }
 
-function classifyNetwork(
+const classifyNetwork = (
   connection?: NavigatorConnection["connection"]
-): "good" | "poor" {
+): "good" | "poor" => {
   if (!connection) return "good";
 
   if (connection.saveData) return "poor";
@@ -30,10 +30,8 @@ function classifyNetwork(
 
   if (connection.rtt !== undefined && connection.rtt > 800) return "poor";
 
-  if ((connection as any).type === "cellular") return "poor";
-
   return "good";
-}
+};
 
 export function useNetworkStatus(
   checkUrl: string = "https://www.gstatic.com/generate_204",
