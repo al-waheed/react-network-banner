@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { MdWifi, MdWifiOff, MdNetworkWifi3Bar } from "react-icons/md";
-import "./style/NetworkBanner.css";
 import { useNetworkStatus, type NetworkStatus } from "./Hook/useNetworkStatus";
+import "./style/NetworkBanner.css"
 
 type BannerState = Exclude<NetworkStatus, "unknown">;
 
@@ -51,7 +51,6 @@ const NetworkBanner: React.FC<NetworkBannerProps> = ({
   }, [status, duration]);
 
   if (status === "unknown" || !showBanner) return null;
-  console.log("Rendering banner with status:", status);
 
   return (
     <div

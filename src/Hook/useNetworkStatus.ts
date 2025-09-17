@@ -78,11 +78,13 @@ export function useNetworkStatus(
     window.addEventListener("online", checkNetworkStatus);
     window.addEventListener("offline", checkNetworkStatus);
     nav.connection?.addEventListener?.("change", checkNetworkStatus);
+    const pollNetworkStatus = window.setInterval(checkNetworkStatus, 10000);
 
     return () => {
       window.removeEventListener("online", checkNetworkStatus);
       window.removeEventListener("offline", checkNetworkStatus);
       nav.connection?.removeEventListener?.("change", checkNetworkStatus);
+      window.clearInterval(pollNetworkStatus);
     };
   }, [checkUrl, timeout]);
 

@@ -25,11 +25,15 @@
     "react-component",
     "typescript"
   ],
+  "sideEffects": [
+    "**/*.css"
+  ],
   "author": "Morenikeji Ajisegiri",
   "license": "MIT",
   "peerDependencies": {
     "react": ">=18.0.0",
-    "react-dom": ">=18.0.0"
+    "react-dom": ">=18.0.0",
+    "react-icons": "^5.5.0"
   },
   "devDependencies": {
     "@types/react": "^19.1.12",
