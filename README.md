@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/npm/l/react-network-banner?color=blue)](https://github.com/al-waheed/react-network-banner/blob/master/LICENSE)
 
 
-A lightweight React component and hook to monitor network connectivity and display a customizable banner when your app goes offline or comes back online. Fully compatible with React, Next.js (SSR), and other modern frameworks.
+A lightweight React component and hook to monitor network connectivity and display a customizable banner when your app goes offline, has poor connection, or comes back online. Fully compatible with React, Next.js (SSR), and other modern frameworks.
 
 ---
 
