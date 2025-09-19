@@ -25,9 +25,9 @@ const NetworkBanner: React.FC<NetworkBannerProps> = ({
     good: "You are online!",
   },
   icons = {
-    offline: <MdWifiOff size={18} />,
-    poor: <MdNetworkWifi3Bar size={18} />,
-    good: <MdWifi size={18} />,
+    offline: <MdWifiOff size={17} />,
+    poor: <MdNetworkWifi3Bar size={17} />,
+    good: <MdWifi size={17} />,
   },
   position = "top",
   duration = 3000,

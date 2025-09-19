@@ -8,8 +8,8 @@
   justify-content: center;
   font-family: "Inter", "Segoe UI", Roboto, sans-serif;
   gap: 0.5rem;
-  padding: 0.3rem;
-  font-size: 13px;
+  padding: 0.1rem;
+  font-size: 12px;
   font-weight: 600;
   color: white;
   transition: transform 0.5s ease-in-out;

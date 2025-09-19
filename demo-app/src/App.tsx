@@ -1,5 +1,5 @@
 // import { useEffect } from "react";
-import { NetworkBanner, useNetworkStatus } from "react-offline-banner";
+import { NetworkBanner, useNetworkStatus } from "react-network-banner";
 
 function App() {
   // const status = useNetworkStatus(); // Hook usage
