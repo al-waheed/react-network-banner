@@ -2,6 +2,14 @@
   "name": "react-network-banner",
   "version": "1.0.18",
   "description": "A lightweight React component and hook to monitor network connectivity and display a banner UI when your app goes offline, or comes back online.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/al-waheed/react-network-banner.git"
+  },
+  "bugs": {
+    "url": "https://github.com/al-waheed/react-network-banner/issues"
+  },
+  "homepage": "https://github.com/al-waheed/react-network-banner/blob/master/README.md",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
