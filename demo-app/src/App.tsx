@@ -1,4 +1,3 @@
-// import { useEffect } from "react";
 import { useEffect } from "react";
 import { NetworkBanner, useNetworkStatus } from "react-network-banner";
 
