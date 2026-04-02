@@ -1,19 +1,20 @@
 // import { useEffect } from "react";
+import { useEffect } from "react";
 import { NetworkBanner, useNetworkStatus } from "react-network-banner";
 
 function App() {
-  // const status = useNetworkStatus(); // Hook usage
+  const status = useNetworkStatus(); // Hook usage
 
   //Show alert whenever status changes
-  // useEffect(() => {
-  //   if (status === "offline") {
-  //     alert("⚠️ You are offline!");
-  //   } else if (status === "poor") {
-  //     alert(" Your network is poor!");
-  //   } else if (status === "good") {
-  //     alert("✅ Back online!");
-  //   }
-  // }, [status]);
+  useEffect(() => {
+    if (status === "offline") {
+      alert("⚠️ You are offline!");
+    } else if (status === "poor") {
+      alert(" Your network is poor!");
+    } else if (status === "good") {
+      alert("✅ Back online!");
+    }
+  }, [status]);
 
   return (
     <div style={{ padding: "2rem" }}>

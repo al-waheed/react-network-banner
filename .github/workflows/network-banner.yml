@@ -21,7 +21,7 @@ jobs:
         run: npm run build
 
       - name: Install demo-app dependencies
-        run: npm ci
+        run: npm install
         working-directory: demo-app
 
       - name: Build demo-app
