@@ -25,7 +25,7 @@ jobs:
         working-directory: demo-app
 
       - name: Build demo-app
-        run: npm run build
+        run: npx vite build
         working-directory: demo-app
 
       # 8️⃣ Deploy to Vercel
